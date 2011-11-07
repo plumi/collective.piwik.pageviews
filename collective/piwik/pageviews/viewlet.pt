@@ -1,0 +1,22 @@
+<span id="piwik-pageviews" class="discreet" style="display:none; "><span class="views"></span> views</span>
+<span id="piwik-unique" class="discreet" style="display:none;"> - <span class="views"></span> unique visits</span>
+
+<script>
+jq(window).load(function() {
+    jq.ajax({
+        url: location + '/@@pageviews',
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            if (data[0] > 0) {
+                jq('#piwik-pageviews span.views').html(data[0]);
+                jq('#piwik-unique span.views').html(data[1]);
+                jq('#piwik-pageviews').fadeIn();
+                jq('#piwik-unique').fadeIn();
+            }
+        },
+        error: function(){
+        }
+    });
+});
+</script>
